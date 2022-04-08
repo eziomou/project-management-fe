@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 0.25em 0.5em;
+}
+
+.actions {
+  padding: 0.25em 0.5em;
+}
+
+.button-group {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 1em;
+}
+
+.project-name {
+  font-size: 1.5em;
+  font-weight: 500;
+}

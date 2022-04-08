@@ -15,4 +15,8 @@ export class ProjectService {
   getProjects(pageRequest: PageRqeuest): Observable<Page<Project>> {
     return this.httpClient.get<Page<Project>>('/api/projects', { params: { ...pageRequest } });
   }
+
+  getProject(id: number): Observable<Project> {
+    return this.httpClient.get<Project>(`/api/projects/${id}`);
+  }
 }
