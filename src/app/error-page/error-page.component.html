@@ -1,0 +1,7 @@
+<div class="container">
+    <div *ngIf="error$ | async as error">
+        {{ error.message }}
+        
+        <a href="#" [routerLink]="['/']">Home</a>
+    </div>
+</div>
