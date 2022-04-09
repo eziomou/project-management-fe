@@ -32,4 +32,8 @@ export class ProjectService {
   getProject(id: number): Observable<Project> {
     return this.httpClient.get<Project>(`/api/projects/${id}`);
   }
+
+  deleteProject(id: number): Observable<any> {
+    return this.httpClient.delete<any>(`/api/projects/${id}`);
+  }
 }

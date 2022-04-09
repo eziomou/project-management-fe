@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { MatInput, MatInputModule } from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
@@ -13,6 +14,7 @@ import { ProjectPageComponent } from './project-page/project-page.component';
 import { ProjectAddPageComponent } from './project-add-page/project-add-page.component';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DeleteProjectDialogComponent } from './delete-project-dialog/delete-project-dialog.component';
 
 const routes: Routes = [
   {
@@ -34,7 +36,8 @@ const routes: Routes = [
   declarations: [
     ProjectsPageComponent,
     ProjectPageComponent,
-    ProjectAddPageComponent
+    ProjectAddPageComponent,
+    DeleteProjectDialogComponent
   ],
   imports: [
     CommonModule,
@@ -42,6 +45,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedModule,
     MatButtonModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
