@@ -1,13 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInput, MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule, Routes } from '@angular/router';
 import { ProjectsPageComponent } from './projects-page/projects-page.component';
 import { ProjectPageComponent } from './project-page/project-page.component';
+import { ProjectAddPageComponent } from './project-add-page/project-add-page.component';
+import { SharedModule } from '../shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -15,6 +20,9 @@ const routes: Routes = [
     children: [{
       path: '',
       component: ProjectsPageComponent
+    }, {
+      path: 'add',
+      component: ProjectAddPageComponent
     }, {
       path: ':id',
       component: ProjectPageComponent
@@ -25,13 +33,18 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ProjectsPageComponent,
-    ProjectPageComponent
+    ProjectPageComponent,
+    ProjectAddPageComponent
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
+    SharedModule,
     MatButtonModule,
+    MatFormFieldModule,
     MatIconModule,
+    MatInputModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatTableModule

@@ -1,0 +1,13 @@
+<app-page-header>
+  <div content>Add project</div>
+</app-page-header>
+
+<form [formGroup]="formGroup" (ngSubmit)="handleSubmit()" class="form">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" />
+    <mat-error *ngIf="formGroup.controls.name.invalid">{{ getError(formGroup.controls.name) }}</mat-error>
+  </mat-form-field>
+
+  <button mat-flat-button color="primary">Add</button>
+</form>
