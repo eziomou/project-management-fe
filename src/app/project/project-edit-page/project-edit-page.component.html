@@ -13,6 +13,12 @@
       <mat-error *ngIf="formGroup.controls.name.invalid">{{ getError(formGroup.controls.name) }}</mat-error>
     </mat-form-field>
 
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" rows="4"></textarea>
+      <mat-error *ngIf="formGroup.controls.description.invalid">{{ getError(formGroup.controls.description) }}</mat-error>
+    </mat-form-field>
+
     <a mat-stroked-button color="primary" [routerLink]="['/projects', project.id]">Cancel</a>
     <button mat-flat-button color="primary">Confirm</button>
   </form>

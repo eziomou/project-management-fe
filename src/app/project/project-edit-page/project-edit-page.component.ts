@@ -20,7 +20,8 @@ export class ProjectEditPageComponent implements OnInit {
   project$: Observable<Project | null>;
   project: Project | null = null;
   formGroup: FormGroup = new FormGroup({
-    name: new FormControl('', [Validators.required])
+    name: new FormControl('', [Validators.required]),
+    description: new FormControl('')
   });
 
   constructor(private router: Router, private route: ActivatedRoute, private projectService: ProjectService) {
@@ -33,7 +34,8 @@ export class ProjectEditPageComponent implements OnInit {
       }), tap(project => {
         this.project = project;
         this.formGroup.patchValue({
-          name: project?.name
+          name: project?.name,
+          description: project?.description
         })
       }));
     }));
@@ -44,7 +46,10 @@ export class ProjectEditPageComponent implements OnInit {
 
   handleSubmit(): void {
     if (this.formGroup.valid) {
-      this.projectService.updateProject(this.project!.id, { name: this.formGroup.controls.name.value})
+      this.projectService.updateProject(this.project!.id, {
+        name: this.formGroup.controls.name.value,
+        description: this.formGroup.controls.description.value
+      })
         .subscribe(() => this.router.navigate(['/projects', this.project!.id]));
     }
   }

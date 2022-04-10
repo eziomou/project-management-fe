@@ -33,7 +33,7 @@ export class ProjectService {
     return this.httpClient.get<Project>(`/api/projects/${id}`);
   }
 
-  updateProject(id: number, data: { name: string }): Observable<any> {
+  updateProject(id: number, data: { name: string, description: string }): Observable<any> {
     return this.httpClient.patch<any>(`/api/projects/${id}`, data);
   }
 

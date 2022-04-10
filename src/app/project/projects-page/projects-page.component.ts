@@ -13,7 +13,7 @@ import { ProjectService } from 'src/app/service/project.service';
 })
 export class ProjectsPageComponent implements AfterViewInit {
 
-  displayedColumns: string[] = ['id', 'name', 'createdAt'];
+  displayedColumns: string[] = ['id', 'name', 'description', 'createdAt'];
 
   data: Project[] = [];
   _metadata: PageMetadata = { totalCount: 0 };

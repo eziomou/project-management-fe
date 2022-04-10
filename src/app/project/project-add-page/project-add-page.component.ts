@@ -19,7 +19,8 @@ export class ProjectAddPageComponent implements OnInit {
 
   constructor(private router: Router, private projectService: ProjectService) {
     this.formGroup = new FormGroup({
-      name: new FormControl('', [Validators.required])
+      name: new FormControl('', [Validators.required]),
+      description: new FormControl('')
     });
   }
 
