@@ -15,6 +15,7 @@ import { ProjectAddPageComponent } from './project-add-page/project-add-page.com
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DeleteProjectDialogComponent } from './delete-project-dialog/delete-project-dialog.component';
+import { ProjectEditPageComponent } from './project-edit-page/project-edit-page.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,9 @@ const routes: Routes = [
     }, {
       path: ':id',
       component: ProjectPageComponent
+    }, {
+      path: ':id/edit',
+      component: ProjectEditPageComponent
     }]
   },
 ];
@@ -37,7 +41,8 @@ const routes: Routes = [
     ProjectsPageComponent,
     ProjectPageComponent,
     ProjectAddPageComponent,
-    DeleteProjectDialogComponent
+    DeleteProjectDialogComponent,
+    ProjectEditPageComponent
   ],
   imports: [
     CommonModule,

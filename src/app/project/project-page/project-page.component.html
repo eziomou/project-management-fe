@@ -1,10 +1,15 @@
 <div *ngIf="project$ | async as project">
   <app-page-header>
-    <div content>{{ project.name }}</div>
+    <div content class="project-page-header-content">
+      <span class="name mat-body-2">{{ project.name }}</span>
+      <span class="created-at mat-caption"
+        >created at: {{ project.createdAt | date: "short" }}</span
+      >
+    </div>
     <div class="button-group" actions>
-      <button mat-icon-button>
+      <a mat-icon-button [routerLink]="['edit']">
         <mat-icon>edit</mat-icon>
-      </button>
+      </a>
       <button mat-icon-button (click)="openDialog()">
         <mat-icon>delete</mat-icon>
       </button>

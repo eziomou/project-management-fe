@@ -13,7 +13,7 @@ import { ProjectService } from 'src/app/service/project.service';
 })
 export class ProjectsPageComponent implements AfterViewInit {
 
-  displayedColumns: string[] = ['id', 'name'];
+  displayedColumns: string[] = ['id', 'name', 'createdAt'];
 
   data: Project[] = [];
   _metadata: PageMetadata = { totalCount: 0 };
@@ -36,7 +36,7 @@ export class ProjectsPageComponent implements AfterViewInit {
         catchError(() => of(null))
       ).subscribe(page => {
         if (page) {
-          this.data = page.data
+          this.data = page.data;
           this._metadata = page._metadata;
         }
         this.loading = false;
