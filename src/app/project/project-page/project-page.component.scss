@@ -1,18 +1,22 @@
-.project-page-header-content  {
+.project-page-header-content {
     display: grid;
     grid-template-areas:
         'name'
         'created-at';
 
-    > .name {
+    >.name {
         grid-area: name;
     }
 
-    > .created-at {
+    >.created-at {
         grid-area: created-at;
     }
 }
 
 .project-page-content {
     padding: 0.4em;
+}
+
+table {
+    width: 100%;
 }

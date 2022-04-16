@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { catchError, switchMap, tap } from 'rxjs/operators';
+import { catchError, filter, switchMap } from 'rxjs/operators';
+import { Page } from 'src/app/model/page';
 import { Project } from 'src/app/model/project';
+import { Task } from 'src/app/model/task';
 import { ProjectService } from 'src/app/service/project.service';
-import { DeleteProjectDialogComponent } from '../delete-project-dialog/delete-project-dialog.component';
+import { TaskService } from 'src/app/service/task.service';
+import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-project-page',
@@ -14,34 +17,66 @@ import { DeleteProjectDialogComponent } from '../delete-project-dialog/delete-pr
 })
 export class ProjectPageComponent implements OnInit {
 
-  project$: Observable<Project | null>;
   project: Project | null = null;
+  tasks: Page<Task> | null = null;
 
-  constructor(private router: Router, private route: ActivatedRoute, private projectService: ProjectService,
+  constructor(private router: Router, private route: ActivatedRoute, private projectService: ProjectService, private taskService: TaskService,
     private dialog: MatDialog) {
-    this.project$ = route.paramMap.pipe(switchMap(params => {
-      return projectService.getProject(+params.get('id')!).pipe(catchError(error => {
+    route.paramMap.pipe(
+      switchMap(params => projectService.getProject(+params.get('id')!)),
+      switchMap(project => {
+        this.project = project;
+        return taskService.getTasksByProjectId(project!.id);
+      }),
+      catchError(error => {
         if (error.status === 404) {
           router.navigate(['error/not-found']);
         }
         return of(null);
-      }), tap(project => {
-        this.project = project;
-      }));
-    }));
+      })
+    ).subscribe(tasks => this.tasks = tasks);
   }
 
   ngOnInit(): void {
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DeleteProjectDialogComponent, {
+  openProjectDialog(project: Project): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '250px',
-      data: { id: this.project?.id, name: this.project?.name },
+      data: {
+        title: `Delete ${project.name}`,
+        content: `Are you sure delete ${project.name}?`,
+        confirmColor: 'warn'
+      },
     });
 
     dialogRef.afterClosed()
-      .pipe(switchMap(id => this.projectService.deleteProject(id)))
+      .pipe(
+        filter(confirm => confirm),
+        switchMap(() => this.projectService.deleteProject(project.id))
+      )
       .subscribe(() => this.router.navigate(['/projects']));
+  }
+
+  openTaskDialog(task: Task): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '250px',
+      data: {
+        title: `Delete ${task.name}`,
+        content: `Are you sure delete ${task.name}?`,
+        confirmColor: 'warn'
+      },
+    });
+
+    dialogRef.afterClosed()
+      .pipe(
+        filter(confirm => confirm),
+        switchMap(() => this.taskService.deleteTask(task))
+      )
+      .subscribe(() => {
+        this.taskService.getTasksByProjectId(task.projectId).subscribe(tasks => {
+          this.tasks = tasks;
+        });
+      });
   }
 }
