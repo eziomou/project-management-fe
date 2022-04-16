@@ -1,0 +1,23 @@
+<app-page-header>
+  <div content>Add task</div>
+</app-page-header>
+
+<form [formGroup]="formGroup" (ngSubmit)="handleSubmit()" class="form">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" />
+    <mat-error *ngIf="formGroup.controls.name.invalid">{{
+      getError(formGroup.controls.name)
+    }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description" rows="4"></textarea>
+    <mat-error *ngIf="formGroup.controls.description.invalid">{{
+      getError(formGroup.controls.description)
+    }}</mat-error>
+  </mat-form-field>
+
+  <button mat-flat-button color="primary">Add</button>
+</form>

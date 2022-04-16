@@ -41,7 +41,7 @@
 
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef style="text-align: right">
-          <button mat-icon-button>
+          <button mat-icon-button [routerLink]="['tasks', 'add']">
             <mat-icon>add</mat-icon>
           </button>
         </th>

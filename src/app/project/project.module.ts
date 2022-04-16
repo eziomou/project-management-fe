@@ -15,6 +15,7 @@ import { ProjectAddPageComponent } from './project-add-page/project-add-page.com
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProjectEditPageComponent } from './project-edit-page/project-edit-page.component';
+import { TaskAddPageComponent } from './task-add-page/task-add-page.component';
 
 const routes: Routes = [
   {
@@ -26,8 +27,14 @@ const routes: Routes = [
       path: 'add',
       component: ProjectAddPageComponent
     }, {
+      path: ':id/tasks/add',
+      component: TaskAddPageComponent
+    }, {
       path: ':id',
       component: ProjectPageComponent
+    }, {
+      path: 'tasks/add',
+      component: TaskAddPageComponent
     }, {
       path: ':id/edit',
       component: ProjectEditPageComponent
@@ -40,7 +47,8 @@ const routes: Routes = [
     ProjectsPageComponent,
     ProjectPageComponent,
     ProjectAddPageComponent,
-    ProjectEditPageComponent
+    ProjectEditPageComponent,
+    TaskAddPageComponent
   ],
   imports: [
     CommonModule,
