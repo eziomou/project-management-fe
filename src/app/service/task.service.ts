@@ -24,8 +24,16 @@ export class TaskService {
     return (locationHeader?.match(/^.*?\/tasks\/(?<id>\d+)$/)?.groups as any)['id'];
   }
 
+  getTask(projectId: number, taskId: number): Observable<Task> {
+    return this.httpClient.get<Task>(`/api/projects/${projectId}/tasks/${taskId}`);
+  }
+
   getTasksByProjectId(projectId: number): Observable<Page<Task>> {
     return this.httpClient.get<Page<Task>>(`/api/projects/${projectId}/tasks`);
+  }
+
+  updateTask(projectId: number, taskId: number, data: { name: string, description: string }): Observable<any> {
+    return this.httpClient.patch<any>(`/api/projects/${projectId}/tasks/${taskId}`, data);
   }
 
   deleteTask(task: Task): Observable<any> {
