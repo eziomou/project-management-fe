@@ -7,6 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProjectModule } from './project/project.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { AuthModule } from './auth/auth.module';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -17,8 +22,18 @@ import { ErrorPageComponent } from './error-page/error-page.component';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    OAuthModule.forRoot({
+      resourceServer: {
+        allowedUrls: ['/api'],
+        sendAccessToken: true
+      }
+    }),
+    AuthModule,
     ProjectModule,
-    AppRoutingModule
+    AppRoutingModule,
+
+    MatButtonModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

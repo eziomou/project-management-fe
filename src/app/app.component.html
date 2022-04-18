@@ -1,1 +1,13 @@
+<mat-toolbar>
+  <span>Project Management</span>
+  <span class="spacer"></span>
+  <div *appAuth="let logged">
+    <button mat-flat-button (click)="logout()" color="primary" *ngIf="logged; else notLogged">
+      Logout
+    </button>
+    <ng-template #notLogged>
+      <button mat-flat-button color="primary" (click)="login()">Login</button>
+    </ng-template>
+  </div>
+</mat-toolbar>
 <router-outlet></router-outlet>
